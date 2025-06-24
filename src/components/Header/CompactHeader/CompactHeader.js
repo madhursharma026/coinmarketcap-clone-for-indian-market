@@ -1,6 +1,9 @@
+import { useTheme } from '@/utils/ThemeContext'
 import styles from './CompactHeader.module.css'
 
 function CompactHeader() {
+  const { isDarkMode, toggleTheme } = useTheme()
+
   return (
     <div
       className={`${styles.compactHeader} d-xxl-none d-flex justify-content-between align-items-center px-3 py-2 border-bottom`}
@@ -17,9 +20,13 @@ function CompactHeader() {
         </span>
       </div>
       <div className="d-flex align-items-center gap-3">
-        <i className="fa fa-search text-secondary fs-5" />
-        <i className="fa fa-diamond text-secondary fs-5"></i>
-        <i className="fa fa-bars text-secondary fs-5" />
+        <i className={`fa fa-search fs-5 ${styles.rightLink}`} />
+        <i className={`fa fa-diamond fs-5 ${styles.rightLink}`} />
+        <i className={`fa fa-bars fs-5 ${styles.rightLink}`} />
+
+        <button onClick={toggleTheme} className={styles.avatarBtn}>
+          {isDarkMode ? '🌙 Dark' : '☀️ Light'}
+        </button>
       </div>
     </div>
   )

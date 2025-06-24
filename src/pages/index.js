@@ -3,10 +3,14 @@ import Header from '@/components/Header/MainHeader/Header'
 import Header2 from '@/components/Header/SecondaryHeader/Header2'
 import StockTable from '@/components/StockTable/StockTable'
 import TrendingCoins from '@/components/TrendingCoins/TrendingCoins'
+import { useTheme } from '@/utils/ThemeContext'
+import styles from '../styles/home.module.css'
 
 export default function Home() {
+  const { isDarkMode } = useTheme()
+
   return (
-    <>
+    <div className={isDarkMode ? `${styles.darkMode}` : `${styles.lightMode}`}>
       <div className="d-xxl-block d-none">
         <Header />
         <Header2 />
@@ -30,7 +34,6 @@ export default function Home() {
       <br />
       <br />
       <br />
-      <br />
-    </>
+    </div>
   )
 }

@@ -5,9 +5,7 @@ function Header2() {
     <div
       className={`${styles.header2} d-flex justify-content-between align-items-center flex-wrap px-3 py-1 border-bottom`}
     >
-      <div
-        className={`${styles.stats} d-flex flex-wrap gap-2 text-secondary fw-medium`}
-      >
+      <div className={`${styles.stats} d-flex flex-wrap gap-2 fw-medium`}>
         <span>
           Cryptos: <a className="text-primary fw-semibold">17.49M</a>
         </span>

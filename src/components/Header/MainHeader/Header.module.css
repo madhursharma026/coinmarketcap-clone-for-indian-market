@@ -3,6 +3,11 @@
     border-bottom: 1px solid #eee;
 }
 
+:global(.dark) .navbar {
+    background-color: #121212;
+    border-bottom-color: #333;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -16,6 +21,10 @@
     white-space: nowrap;
 }
 
+:global(.dark) .logoText {
+    color: #fff;
+}
+
 .navLinks {
     display: flex;
     align-items: center;
@@ -26,6 +35,10 @@
 .navLinks a {
     font-size: 0.95rem;
     color: #111 !important;
+}
+
+:global(.dark) .navLinks a {
+    color: #ddd !important;
 }
 
 .rightSection {
@@ -42,9 +55,8 @@
     gap: 0.4rem;
 }
 
-.searchForm {
-    display: flex;
-    align-items: center;
+:global(.dark) .rightLink {
+    color: #bbb !important;
 }
 
 .searchForm input {
@@ -52,12 +64,14 @@
     font-size: 0.9rem;
     padding: 0 10px;
     border-radius: 6px;
+    background-color: #fff;
+    color: #000;
 }
 
-.loginBtn {
-    padding: 4px 12px;
-    font-size: 0.9rem;
-    border-radius: 8px;
+:global(.dark) .searchForm input {
+    background-color: #1f1f1f;
+    color: #fff;
+    border: 1px solid #333;
 }
 
 .qrContainer {
@@ -73,8 +87,17 @@
     transition: background-color 0.2s ease;
 }
 
+:global(.dark) .qrContainer {
+    background-color: #333;
+    color: #eee;
+}
+
 .qrContainer:hover {
     background-color: #d5d5d5;
+}
+
+:global(.dark) .qrContainer:hover {
+    background-color: #444;
 }
 
 .avatarBtn {
@@ -93,4 +116,13 @@
 
 .avatarBtn:hover {
     background: #d2d2d2;
+}
+
+:global(.dark) .avatarBtn {
+    background: #333;
+    color: #fff;
+}
+
+:global(.dark) .avatarBtn:hover {
+    background: #444;
 }

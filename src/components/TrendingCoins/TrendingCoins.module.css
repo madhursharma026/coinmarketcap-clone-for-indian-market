@@ -7,6 +7,12 @@
     max-width: 100%;
 }
 
+.darkCard {
+    background: #1f1f1f;
+    color: #ddd;
+    box-shadow: none;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -39,6 +45,10 @@
     border-top: 1px solid #f1f3f5;
 }
 
+.darkCard .row {
+    border-top: 1px solid #333;
+}
+
 .row:first-child {
     border-top: none;
 }
@@ -48,6 +58,10 @@
     font-weight: 600;
     color: #495057;
     font-size: 14px;
+}
+
+.darkCard .rank {
+    color: #aaa;
 }
 
 .icon {

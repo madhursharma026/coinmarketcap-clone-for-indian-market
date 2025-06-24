@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button'
+import { useTheme } from '@/utils/ThemeContext'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Nav from 'react-bootstrap/Nav'
@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import styles from './Header.module.css'
 
 function Header() {
+  const { isDarkMode, toggleTheme } = useTheme()
   return (
     <Navbar expand="xxl" className={styles.navbar}>
       <Container fluid>
@@ -49,14 +50,14 @@ function Header() {
               <i className="fa fa-qrcode" />
             </div>
 
-            <Button variant="primary" className={styles.loginBtn}>
-              Log In
-            </Button>
-
             <button type="button" className={styles.avatarBtn}>
               <i className="fa fa-bars" />
               &ensp;
               <i className="fa fa-user" />
+            </button>
+
+            <button onClick={toggleTheme} className={styles.avatarBtn}>
+              {isDarkMode ? '🌙 Dark' : '☀️ Light'}
             </button>
           </div>
         </Navbar.Collapse>

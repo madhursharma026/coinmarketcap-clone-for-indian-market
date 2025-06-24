@@ -1,3 +1,4 @@
+import { useTheme } from '@/utils/ThemeContext'
 import styles from './TrendingCoins.module.css'
 
 const data = [
@@ -39,8 +40,10 @@ const data = [
 ]
 
 export default function TrendingCoins() {
+  const { isDarkMode } = useTheme()
+
   return (
-    <div className={`${styles.card} my-3`}>
+    <div className={`${styles.card} ${isDarkMode ? styles.darkCard : ''} my-3`}>
       <div className={styles.header}>
         <span className={styles.title}>Trending Coins</span>
         <div className={styles.actions}>

@@ -1,3 +1,4 @@
+import { useTheme } from '@/utils/ThemeContext'
 import { useEffect, useState } from 'react'
 import { Alert, Pagination, Spinner, Table } from 'react-bootstrap'
 import styles from './StockTable.module.css'
@@ -12,6 +13,8 @@ export default function StockTable() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
+
+  const { isDarkMode } = useTheme()
 
   useEffect(() => {
     fetch('/api/stocks')
@@ -55,31 +58,74 @@ export default function StockTable() {
 
   if (error) {
     return (
-      <Alert variant="danger" className="mt-4 text-center">
-        {error}
-      </Alert>
+      <div
+        className={`d-flex flex-column ${
+          isDarkMode ? 'bg-dark text-light' : 'bg-light text-dark'
+        }`}
+        style={{ minHeight: '50vh', overflow: 'hidden' }} // Adjust minHeight as per your design
+      >
+        <div className="flex-fill d-flex justify-content-center align-items-center">
+          <Alert
+            variant={isDarkMode ? 'dark' : 'danger'}
+            className="text-center p-4 w-75"
+          >
+            <h4>Something went wrong!</h4>
+            <p className="mb-0">{error}</p>
+          </Alert>
+        </div>
+      </div>
     )
   }
 
   return (
     <>
-      <div className={`${styles.tableWrapper} table-responsive mt-4`}>
-        <Table className={`table-borderless align-middle ${styles.cleanTable}`}>
-          <thead className={styles.tableHeader}>
+      <div
+        className={`${
+          styles.tableWrapper
+        } table-responsive rounded-0 mt-4 mx-3 ${
+          isDarkMode ? styles.darkTableWrapper : ''
+        }`}
+      >
+        <Table
+          className={`table-borderless align-middle ${styles.cleanTable} ${
+            isDarkMode ? styles.darkTable : ''
+          }`}
+        >
+          <thead
+            className={`${styles.tableHeader} ${
+              isDarkMode ? styles.darkTableHeader : ''
+            }`}
+          >
             <tr>
               <th>#</th>
-              <th className="text-start fw-bold">Company</th>
-              <th className="text-end fw-bold">Price (₹)</th>
-              <th className="text-end fw-bold">Change (₹)</th>
-              <th className="text-end fw-bold">Change (%)</th>
-              <th className="text-end fw-bold">Open</th>
-              <th className="text-end fw-bold">High</th>
-              <th className="text-end fw-bold">Low</th>
-              <th className="text-end fw-bold">Volume</th>
-              <th className="text-end fw-bold">Trade Value</th>
-              <th className="text-end fw-bold">52W High</th>
-              <th className="text-end fw-bold">52W Low</th>
-              <th className="text-center fw-bold">Chart</th>
+              <th className={`${styles.textColor} text-start fw-bold`}>
+                Company
+              </th>
+              <th className={`${styles.textColor} text-end fw-bold`}>
+                Price (₹)
+              </th>
+              <th className={`${styles.textColor} text-end fw-bold`}>
+                Change (₹)
+              </th>
+              <th className={`${styles.textColor} text-end fw-bold`}>
+                Change (%)
+              </th>
+              <th className={`${styles.textColor} text-end fw-bold`}>Open</th>
+              <th className={`${styles.textColor} text-end fw-bold`}>High</th>
+              <th className={`${styles.textColor} text-end fw-bold`}>Low</th>
+              <th className={`${styles.textColor} text-end fw-bold`}>Volume</th>
+              <th className={`${styles.textColor} text-end fw-bold`}>
+                Trade Value
+              </th>
+              <th className={`${styles.textColor} text-end fw-bold`}>
+                52W High
+              </th>
+              <th className={`${styles.textColor} text-end fw-bold`}>
+                52W Low
+              </th>
+              <th className={`${styles.textColor} text-center fw-bold`}>
+                Chart
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -94,7 +140,9 @@ export default function StockTable() {
                     </div>
                   </div>
                 </td>
-                <td className="text-end">₹{format(stock.lastPrice)}</td>
+                <td className={`text-end ${styles.textColor}`}>
+                  ₹{format(stock.lastPrice)}
+                </td>
                 <td
                   className={`text-end ${
                     stock.change >= 0 ? 'text-success' : 'text-danger'
@@ -109,13 +157,27 @@ export default function StockTable() {
                 >
                   {stock.pChange >= 0 ? '▲' : '▼'} {format(stock.pChange)}%
                 </td>
-                <td className="text-end">₹{format(stock.open)}</td>
-                <td className="text-end">₹{format(stock.dayHigh)}</td>
-                <td className="text-end">₹{format(stock.dayLow)}</td>
-                <td className="text-end">{format(stock.totalTradedVolume)}</td>
-                <td className="text-end">₹{format(stock.totalTradedValue)}</td>
-                <td className="text-end">₹{format(stock.yearHigh)}</td>
-                <td className="text-end">₹{format(stock.yearLow)}</td>
+                <td className={`text-end ${styles.textColor}`}>
+                  ₹{format(stock.open)}
+                </td>
+                <td className={`text-end ${styles.textColor}`}>
+                  ₹{format(stock.dayHigh)}
+                </td>
+                <td className={`text-end ${styles.textColor}`}>
+                  ₹{format(stock.dayLow)}
+                </td>
+                <td className={`text-end ${styles.textColor}`}>
+                  {format(stock.totalTradedVolume)}
+                </td>
+                <td className={`text-end ${styles.textColor}`}>
+                  ₹{format(stock.totalTradedValue)}
+                </td>
+                <td className={`text-end ${styles.textColor}`}>
+                  ₹{format(stock.yearHigh)}
+                </td>
+                <td className={`text-end ${styles.textColor}`}>
+                  ₹{format(stock.yearLow)}
+                </td>
                 <td className="text-center">
                   {stock.chartTodayPath ? (
                     <img
@@ -134,39 +196,56 @@ export default function StockTable() {
         </Table>
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
-        <div className="d-flex justify-content-center mt-3">
-          <Pagination>
-            <Pagination.First
-              onClick={() => handlePageChange(1)}
-              disabled={currentPage === 1}
-            />
-            <Pagination.Prev
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            />
+        <Pagination className={`d-flex justify-content-center mt-3`}>
+          <Pagination.First
+            onClick={() => handlePageChange(1)}
+            disabled={currentPage === 1}
+          />
+          <Pagination.Prev
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          />
 
-            {Array.from({ length: totalPages }, (_, i) => (
+          {currentPage > 2 && (
+            <>
+              <Pagination.Item onClick={() => handlePageChange(1)}>
+                1
+              </Pagination.Item>
+              {currentPage > 3 && <Pagination.Ellipsis disabled />}
+            </>
+          )}
+
+          {[currentPage - 1, currentPage, currentPage + 1]
+            .filter((page) => page > 1 && page < totalPages)
+            .map((page) => (
               <Pagination.Item
-                key={i}
-                active={i + 1 === currentPage}
-                onClick={() => handlePageChange(i + 1)}
+                key={page}
+                active={page === currentPage}
+                onClick={() => handlePageChange(page)}
               >
-                {i + 1}
+                {page}
               </Pagination.Item>
             ))}
 
-            <Pagination.Next
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            />
-            <Pagination.Last
-              onClick={() => handlePageChange(totalPages)}
-              disabled={currentPage === totalPages}
-            />
-          </Pagination>
-        </div>
+          {currentPage < totalPages - 1 && (
+            <>
+              {currentPage < totalPages - 2 && <Pagination.Ellipsis disabled />}
+              <Pagination.Item onClick={() => handlePageChange(totalPages)}>
+                {totalPages}
+              </Pagination.Item>
+            </>
+          )}
+
+          <Pagination.Next
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          />
+          <Pagination.Last
+            onClick={() => handlePageChange(totalPages)}
+            disabled={currentPage === totalPages}
+          />
+        </Pagination>
       )}
     </>
   )

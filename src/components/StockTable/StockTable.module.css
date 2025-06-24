@@ -5,11 +5,20 @@
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
 }
 
+.darkTableWrapper {
+    background: #1c1c1e;
+    box-shadow: none;
+}
+
 .cleanTable {
     font-size: 13.5px;
     border-collapse: separate;
     border-spacing: 0;
     min-width: 1200px;
+}
+
+.darkTable {
+    color: #eee;
 }
 
 .tableHeader th {
@@ -24,6 +33,12 @@
     border-bottom: 1px solid #dee2e6;
 }
 
+.darkTableHeader th {
+    background-color: #2c2c2e !important;
+    color: #ccc;
+    border-color: #3c3c3e;
+}
+
 .tableRow td {
     vertical-align: middle;
     white-space: nowrap;
@@ -32,8 +47,17 @@
     background: #fff;
 }
 
+.darkTable .tableRow td {
+    background: #1f1f1f;
+    border-bottom: 1px solid #333;
+}
+
 .tableRow:hover td {
     background-color: #f9f9f9;
+}
+
+.darkTable .tableRow:hover td {
+    background-color: #2a2a2a;
 }
 
 .companyCell {
@@ -55,6 +79,14 @@
     color: #212529;
 }
 
+.darkTable .symbolText {
+    color: #999;
+}
+
+.darkTable .companyName {
+    color: #ddd;
+}
+
 .chartImg {
     display: block;
     margin: 0 auto;
@@ -67,4 +99,12 @@
 
 .text-center {
     text-align: center !important;
+}
+
+.textColor {
+    color: #000;
+}
+
+:global(.dark) .textColor {
+    color: #fff;
 }
